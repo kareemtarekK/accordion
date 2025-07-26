@@ -26,20 +26,31 @@ export default function App() {
 }
 
 function Accordion() {
+  const [open, setIsOpen] = useState(null);
   return (
     <div className="accordion">
       {data.map((item, i) => (
-        <Item item={item} num={i + 1} key={i} />
+        <Item
+          item={item}
+          num={i + 1}
+          key={i}
+          open={open}
+          onSetOpen={setIsOpen}
+        />
       ))}
     </div>
   );
 }
 
-function Item({ item, num }) {
-  const [isOpen, setIsOpen] = useState(false);
+function Item({ item, num, open, onSetOpen }) {
+  const isOpen = open === num;
+  // const [isOpen, setIsOpen] = useState(false);
 
+  // function handleToggle() {
+  //   setIsOpen((isOpen) => !isOpen);
+  // }
   function handleToggle() {
-    setIsOpen((isOpen) => !isOpen);
+    onSetOpen(() => (isOpen ? null : num));
   }
 
   return (
