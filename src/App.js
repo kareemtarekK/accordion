@@ -30,19 +30,15 @@ function Accordion() {
   return (
     <div className="accordion">
       {data.map((item, i) => (
-        <Item
-          item={item}
-          num={i + 1}
-          key={i}
-          open={open}
-          onSetOpen={setIsOpen}
-        />
+        <Item item={item} num={i + 1} key={i} open={open} onSetOpen={setIsOpen}>
+          {item.text}
+        </Item>
       ))}
     </div>
   );
 }
 
-function Item({ item, num, open, onSetOpen }) {
+function Item({ item, num, open, onSetOpen, children }) {
   const isOpen = open === num;
   // const [isOpen, setIsOpen] = useState(false);
 
@@ -63,7 +59,7 @@ function Item({ item, num, open, onSetOpen }) {
       </span>
       <p>{item.title}</p>
       <span className="span-r">{isOpen ? `-` : "+"}</span>
-      {isOpen && <p className="special">{item.text}</p>}
+      {isOpen && <p className="special">{children}</p>}
     </div>
   );
 }
